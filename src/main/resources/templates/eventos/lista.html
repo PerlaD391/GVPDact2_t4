@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title th:text="${nombreProyecto} + ' - Cartelera de eventos'">CulturaVibe - Cartelera de eventos</title>
+	<style>
+		body { font-family: system-ui, sans-serif; background: #0f172a; color: #e2e8f0; margin: 0; }
+		header { background: #1e293b; padding: 1.2rem 2rem; border-bottom: 3px solid #a855f7; }
+		header h1 { margin: 0; color: #f0abfc; }
+		header p { margin: 0.2rem 0 0; color: #94a3b8; font-size: 0.9rem; }
+		main { max-width: 960px; margin: 0 auto; padding: 1.5rem; }
+		.error { background: #7f1d1d; padding: 0.8rem 1rem; border-radius: 8px; margin-bottom: 1rem; }
+		.filtro { display: flex; gap: 0.6rem; align-items: center; margin-bottom: 1.2rem; flex-wrap: wrap; }
+		.filtro select, .filtro button { padding: 0.5rem 0.8rem; border-radius: 6px; border: 1px solid #475569; background: #1e293b; color: #e2e8f0; font-size: 1rem; }
+		.filtro button { background: #a855f7; border: none; cursor: pointer; }
+		.nuevo { display: inline-block; background: #a855f7; color: #fff; text-decoration: none; padding: 0.6rem 1rem; border-radius: 6px; margin-bottom: 1.2rem; }
+		.tarjeta { background: #1e293b; border-radius: 10px; padding: 1rem 1.2rem; margin-bottom: 1rem; }
+		.tarjeta h2 { margin: 0 0 0.3rem; color: #f0abfc; }
+		.tarjeta p { margin: 0.2rem 0; color: #cbd5e1; }
+		.tarjeta a { color: #c084fc; }
+		.etiqueta { display: inline-block; background: #581c87; color: #f5d0fe; font-size: 0.8rem; padding: 0.15rem 0.6rem; border-radius: 999px; margin-right: 0.4rem; }
+	</style>
+</head>
+<body>
+<header>
+	<h1 th:text="${nombreProyecto}">CulturaVibe</h1>
+	<p>Cartelera de eventos culturales en México · Autora: <span th:text="${autora}">Perla Danae Gallardo Vasquez (GVPD)</span></p>
+</header>
+<main>
+	<p class="error" th:if="${error}" th:text="${error}"></p>
+
+	<form class="filtro" method="get" th:action="@{/eventos}">
+		<label for="categoria">Filtrar por categoría:</label>
+		<select id="categoria" name="categoria">
+			<option value="">Todas las categorías</option>
+			<option th:each="cat : ${categorias}" th:value="${cat}" th:text="${cat}"
+				th:selected="${cat == categoriaSeleccionada}"></option>
+		</select>
+		<button type="submit">Filtrar</button>
+	</form>
+
+	<a class="nuevo" th:href="@{/eventos/nuevo}">+ Agregar un evento</a>
+
+	<p th:if="${#lists.isEmpty(eventos)}">No hay eventos para esta categoría.</p>
+
+	<div class="tarjeta" th:each="evento : ${eventos}">
+		<h2 th:text="${evento.nombre}">Nombre del evento</h2>
+		<p>
+			<span class="etiqueta" th:text="${evento.categoria}">Categoría</span>
+			<span class="etiqueta" th:text="${evento.estado}">Estado</span>
+			<span th:text="${evento.fecha}">2026-11-12</span>
+			· <span th:text="${evento.hora}">20:00</span>
+		</p>
+		<p th:text="${evento.sede} + ' — ' + ${evento.ciudad}">Sede — Ciudad</p>
+		<p>Precio: <strong th:text="${evento.precio}">$450</strong></p>
+		<p><a th:href="@{/eventos/{id}(id=${evento.id})}">Ver detalle</a></p>
+	</div>
+</main>
+</body>
+</html>

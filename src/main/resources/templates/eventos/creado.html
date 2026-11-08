@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title th:text="'Evento guardado - ' + ${nombreProyecto}">Evento guardado</title>
+	<style>
+		body { font-family: system-ui, sans-serif; background: #0f172a; color: #e2e8f0; margin: 0; }
+		header { background: #1e293b; padding: 1.2rem 2rem; border-bottom: 3px solid #a855f7; }
+		header h1 { margin: 0; color: #f0abfc; }
+		header p { margin: 0.2rem 0 0; color: #94a3b8; font-size: 0.9rem; }
+		main { max-width: 640px; margin: 0 auto; padding: 1.5rem; }
+		.tarjeta { background: #1e293b; border-radius: 10px; padding: 1.5rem; }
+		.tarjeta h2 { margin-top: 0; color: #4ade80; }
+		dt { color: #94a3b8; font-size: 0.85rem; margin-top: 0.8rem; }
+		dd { margin: 0.1rem 0 0; }
+		a { color: #c084fc; }
+		.acciones { margin-top: 1.2rem; display: flex; gap: 1rem; }
+	</style>
+</head>
+<body>
+<header>
+	<h1 th:text="${nombreProyecto}">CulturaVibe</h1>
+	<p>Autora: <span th:text="${autora}">Perla Danae Gallardo Vasquez (GVPD)</span></p>
+</header>
+<main>
+	<div class="tarjeta">
+		<h2>¡Evento guardado!</h2>
+		<p>El evento se agregó a la cartelera con los datos del formulario:</p>
+		<dl>
+			<dt>Nombre</dt>
+			<dd th:text="${evento.nombre}">Nombre del evento</dd>
+			<dt>Fecha y hora</dt>
+			<dd th:text="${evento.fecha} + ' a las ' + ${evento.hora}">2026-11-12 a las 20:00</dd>
+			<dt>Sede</dt>
+			<dd th:text="${evento.sede} + ' — ' + ${evento.ciudad} + ', ' + ${evento.estado}">Sede</dd>
+			<dt>Categoría</dt>
+			<dd th:text="${evento.categoria}">Música</dd>
+			<dt>Precio</dt>
+			<dd th:text="${evento.precio}">$450</dd>
+			<dt>Descripción</dt>
+			<dd th:text="${evento.descripcion}">Descripción del evento.</dd>
+		</dl>
+	</div>
+	<div class="acciones">
+		<a th:href="@{/eventos/{id}(id=${evento.id})}">Ver el detalle del evento</a>
+		<a th:href="@{/eventos}">Volver a la cartelera</a>
+	</div>
+</main>
+</body>
+</html>

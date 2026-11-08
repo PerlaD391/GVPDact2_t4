@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title th:text="'Agregar evento - ' + ${nombreProyecto}">Agregar evento</title>
+	<style>
+		body { font-family: system-ui, sans-serif; background: #0f172a; color: #e2e8f0; margin: 0; }
+		header { background: #1e293b; padding: 1.2rem 2rem; border-bottom: 3px solid #a855f7; }
+		header h1 { margin: 0; color: #f0abfc; }
+		header p { margin: 0.2rem 0 0; color: #94a3b8; font-size: 0.9rem; }
+		main { max-width: 640px; margin: 0 auto; padding: 1.5rem; }
+		form { background: #1e293b; border-radius: 10px; padding: 1.5rem; }
+		.campo { margin-bottom: 1rem; }
+		label { display: block; margin-bottom: 0.3rem; color: #cbd5e1; }
+		input, select, textarea { width: 100%; box-sizing: border-box; padding: 0.55rem 0.7rem; border-radius: 6px; border: 1px solid #475569; background: #0f172a; color: #e2e8f0; font-size: 1rem; }
+		button { background: #a855f7; color: #fff; border: none; padding: 0.7rem 1.2rem; border-radius: 6px; font-size: 1rem; cursor: pointer; }
+		a { color: #c084fc; }
+		.volver { display: inline-block; margin-top: 1rem; }
+	</style>
+</head>
+<body>
+<header>
+	<h1 th:text="${nombreProyecto}">CulturaVibe</h1>
+	<p>Autora: <span th:text="${autora}">Perla Danae Gallardo Vasquez (GVPD)</span></p>
+</header>
+<main>
+	<h2>Agregar un evento</h2>
+	<form method="post" th:action="@{/eventos}" th:object="${eventoDTO}">
+		<div class="campo">
+			<label for="nombre">Nombre del evento</label>
+			<input id="nombre" type="text" th:field="*{nombre}" required>
+		</div>
+		<div class="campo">
+			<label for="fecha">Fecha</label>
+			<input id="fecha" type="date" th:field="*{fecha}" required>
+		</div>
+		<div class="campo">
+			<label for="hora">Hora</label>
+			<input id="hora" type="time" th:field="*{hora}">
+		</div>
+		<div class="campo">
+			<label for="sede">Sede</label>
+			<input id="sede" type="text" th:field="*{sede}">
+		</div>
+		<div class="campo">
+			<label for="direccion">Dirección</label>
+			<input id="direccion" type="text" th:field="*{direccion}">
+		</div>
+		<div class="campo">
+			<label for="ciudad">Ciudad</label>
+			<input id="ciudad" type="text" th:field="*{ciudad}">
+		</div>
+		<div class="campo">
+			<label for="estado">Estado</label>
+			<select id="estado" th:field="*{estado}">
+				<option value="CDMX">Ciudad de México (CDMX)</option>
+				<option value="NL">Nuevo León (NL)</option>
+				<option value="JAL">Jalisco (JAL)</option>
+				<option value="SIN">Sinaloa (SIN)</option>
+				<option value="MEX">Estado de México (MEX)</option>
+				<option value="PUE">Puebla (PUE)</option>
+				<option value="GRO">Guerrero (GRO)</option>
+				<option value="MOR">Morelos (MOR)</option>
+			</select>
+		</div>
+		<div class="campo">
+			<label for="categoria">Categoría</label>
+			<select id="categoria" th:field="*{categoria}">
+				<option value="Música">Música</option>
+				<option value="Cine">Cine</option>
+				<option value="Arte">Arte</option>
+				<option value="Libros">Libros</option>
+				<option value="Teatro">Teatro</option>
+			</select>
+		</div>
+		<div class="campo">
+			<label for="precio">Precio</label>
+			<input id="precio" type="text" th:field="*{precio}" placeholder="$450 o Gratis">
+		</div>
+		<div class="campo">
+			<label for="estadoVenta">Estado de la venta</label>
+			<select id="estadoVenta" th:field="*{estadoVenta}">
+				<option value="onsale">A la venta (onsale)</option>
+				<option value="offsale">Venta cerrada (offsale)</option>
+			</select>
+		</div>
+		<div class="campo">
+			<label for="descripcion">Descripción</label>
+			<textarea id="descripcion" rows="3" th:field="*{descripcion}"></textarea>
+		</div>
+		<div class="campo">
+			<label for="artistas">Artistas (separados por comas)</label>
+			<input id="artistas" type="text" th:field="*{artistas}" placeholder="Artista 1, Artista 2">
+		</div>
+		<div class="campo">
+			<label for="url">Enlace de boletos</label>
+			<input id="url" type="text" th:field="*{url}" placeholder="https://www.ticketmaster.com.mx">
+		</div>
+		<button type="submit">Guardar evento</button>
+	</form>
+	<a class="volver" th:href="@{/eventos}">← Volver a la cartelera</a>
+</main>
+</body>
+</html>
