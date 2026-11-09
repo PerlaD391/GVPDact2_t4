@@ -62,19 +62,19 @@ exponer la entidad directamente en la vista ni en la petición.
 
 ### Vista con el listado (th:each funcionando)
 
-![Listado de eventos](docs/lista.png)
+![Listado de eventos](docs/image-9.png)
 
 ### Filtro por categoría (@RequestParam)
 
-![Filtro por categoría Música](docs/filtro-categoria.png)
+![Filtro por categoría Música](docs/image-10.png)
 
 ### Detalle de un evento (@PathVariable)
 
-![Detalle del evento ev-1](docs/detalle.png)
+![Detalle del evento ev-1](docs/image-11.png)
 
 ### Formulario con @ModelAttribute
 
-![Formulario para agregar un evento](docs/formulario.png)
+![Formulario para agregar un evento](docs/image-12.png)
 
 ### Petición POST probada en Postman
 
@@ -102,7 +102,7 @@ La petición POST se probó en Postman enviando este JSON a
 Respuesta: **201 Created** con el evento creado (id `ev-8`, con los
 artistas ya como lista en el JSON de respuesta).
 
-![POST probado en Postman](docs/postman-post.png)
+![POST probado en Postman](docs/image.png)
 
 También se puede probar con curl:
 
